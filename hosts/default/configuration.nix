@@ -147,8 +147,11 @@
      rofi-wayland
      # network manager applet
      networkmanagerapplet
+     
      # file manager
      dolphin
+     # for icons in dolphin
+     qt6-full
   ];
 
   # Enable OpenGL
