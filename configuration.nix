@@ -202,6 +202,8 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = false;
 
 
   # Some programs need SUID wrappers, can be configured further or are
