@@ -124,6 +124,25 @@
      gh
      waybar
      eww
+     
+     (pkgs.waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+     )
+     
+     # notification deamon - pure wayland 
+     mako
+     # dependency for mako
+     libnotify
+
+     # wallpaper compositor
+     swww
+
+     # terminal emulator
+     kitty
+     
+     # app launcher
+     rofi-wayland
   ];
 
   # Enable OpenGL
@@ -220,7 +239,8 @@
     };
   };
 
-
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
 
 
