@@ -122,6 +122,8 @@
      git
      git-lfs
      gh
+     waybar
+     eww
   ];
 
   # Enable OpenGL
