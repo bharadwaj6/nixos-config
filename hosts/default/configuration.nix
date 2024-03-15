@@ -143,6 +143,8 @@
      
      # app launcher
      rofi-wayland
+     # network manager applet
+     networkmanagerapplet
   ];
 
   # Enable OpenGL
