@@ -116,6 +116,8 @@
      vscode
      k3s
      k9s
+     bat
+     eza
   ];
 
   # Enable OpenGL
@@ -183,6 +185,21 @@
     # "--kubelet-arg=v=4" # Optionally add additional args to k3s
   ];
 
+  programs.hyprland = {
+    enable = true;
+    enableNvidiaPatches = true;
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables = {
+    # If your cursor becomes invisible
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+  };
+
+
+  
 
 
 
