@@ -130,9 +130,11 @@
       })
      )
      
-     # notification deamon - pure wayland 
+     # notification deamon - also works on X 
+     dunst
+     # notification daemon - pure wayland
      mako
-     # dependency for mako
+     # dependency for both notification daemons
      libnotify
 
      # wallpaper compositor
