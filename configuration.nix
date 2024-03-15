@@ -164,6 +164,9 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ "bharadwaj" ];
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
