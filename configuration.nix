@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, inputs, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.default
     ];
 
   # Bootloader.
@@ -46,8 +47,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -94,8 +95,8 @@
   services.xserver.displayManager.autoLogin.user = "bharadwaj";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
+  # systemd.services."getty@tty1".enable = false;
+  # systemd.services."autovt@tty1".enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -118,6 +119,9 @@
      k9s
      bat
      eza
+     git
+     git-lfs
+     gh
   ];
 
   # Enable OpenGL
@@ -202,10 +206,20 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;
 
+
   services.x2goserver.enable = true;
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "bharadwaj" = import ./home.nix;
+    };
+  };
+
+
+
 
 
   # Some programs need SUID wrappers, can be configured further or are
