@@ -28,7 +28,7 @@
     ripgrep
     ncdu
     nix-tree
-    vscode
+    # vscode
     k3s
     k9s
     bat
@@ -70,7 +70,7 @@
 
     # other packages
     obs-studio
-    discord
+    # discord
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
