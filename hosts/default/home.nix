@@ -75,4 +75,8 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+
+  # for gnome to show the top right icons
+  dconf.settings."org/gnome/desktop/wm/preferences".button-layout = "minimize,maximize,close";
 }

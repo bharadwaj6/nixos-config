@@ -51,8 +51,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -99,8 +99,8 @@
   services.xserver.displayManager.autoLogin.user = "bharadwaj";
 
   # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  # systemd.services."getty@tty1".enable = false;
-  # systemd.services."autovt@tty1".enable = false;
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -189,18 +189,18 @@
     # "--kubelet-arg=v=4" # Optionally add additional args to k3s
   ];
 
-  programs.hyprland = {
-    enable = true;
-    # enableNvidiaPatches = true;
-    xwayland.enable = true;
-  };
+  #programs.hyprland = {
+  #  enable = true;
+  #  # enableNvidiaPatches = true;
+  #  xwayland.enable = true;
+  #};
 
-  environment.sessionVariables = {
-    # If your cursor becomes invisible
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-  };
+  #environment.sessionVariables = {
+  #  # If your cursor becomes invisible
+  #  WLR_NO_HARDWARE_CURSORS = "1";
+  #  # Hint electron apps to use wayland
+  #  NIXOS_OZONE_WL = "1";
+  #};
 
   services.tailscale.enable = true;
 
@@ -217,8 +217,8 @@
     };
   };
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  #xdg.portal.enable = true;
+  #xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
