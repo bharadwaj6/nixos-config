@@ -129,6 +129,8 @@
     waybar
     eww
     lf
+    nurl
+    comma
 
     (
       pkgs.waybar.overrideAttrs (oldAttrs: {
