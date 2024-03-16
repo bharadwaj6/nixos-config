@@ -27,7 +27,9 @@
         ./hosts/default/configuration.nix
         inputs.home-manager.nixosModules.default
         inputs.microvm.nixosModules.microvm
-        inputs.microvm.nixosModules.host
+        {
+          microvm.hypervisor = "cloud-hypervisor";
+        }
       ];
     };
   };
