@@ -1,16 +1,19 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, lib, inputs, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./nvidia.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./nvidia.nix
+    inputs.home-manager.nixosModules.default
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -84,10 +87,10 @@
   users.users.bharadwaj = {
     isNormalUser = true;
     description = "Bharadwaj";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       firefox
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -127,12 +130,13 @@
     eww
     lf
 
-    (pkgs.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    (
+      pkgs.waybar.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
       })
-     )
+    )
 
-    # notification deamon - also works on X 
+    # notification deamon - also works on X
     dunst
     # notification daemon - pure wayland
     mako
@@ -144,7 +148,7 @@
 
     # terminal emulator
     kitty
-    
+
     # app launcher
     rofi-wayland
     # network manager applet
@@ -169,7 +173,7 @@
   };
 
   virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = [ "bharadwaj" ];
+  users.extraGroups.docker.members = ["bharadwaj"];
 
   networking.firewall.allowedTCPPorts = [
     6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
@@ -200,24 +204,21 @@
 
   services.tailscale.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   systemd.services.NetworkManager-wait-online.enable = false;
-
 
   services.x2goserver.enable = true;
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
     users = {
       "bharadwaj" = import ./home.nix;
     };
   };
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-
-
+  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -245,5 +246,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
