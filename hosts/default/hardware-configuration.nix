@@ -41,6 +41,15 @@
   # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
+  # Enable OpenGL
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   hardware.enableAllFirmware = true;
@@ -49,8 +58,8 @@
     powerOnBoot = true;
     settings = {
       General = {
-        Name = "Hello";
-        ControllerMode = "dual";
+        # Name = "Hello";
+        # ControllerMode = "dual";
         FastConnectable = "true";
         Experimental = "true";
       };
