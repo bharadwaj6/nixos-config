@@ -105,8 +105,54 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    vim
+    wget
+    curl
+    htop
+    jq
+    tmux
+    yq
+    ripgrep
+    ncdu
+    nix-tree
     vscode
-    discord 
+    k3s
+    k9s
+    bat
+    eza
+    git
+    git-lfs
+    gh
+    waybar
+    eww
+    lf
+
+    (pkgs.waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+      })
+     )
+
+    # notification deamon - also works on X 
+    dunst
+    # notification daemon - pure wayland
+    mako
+    # dependency for both notification daemons
+    libnotify
+
+    # wallpaper compositor
+    swww
+
+    # terminal emulator
+    kitty
+    
+    # app launcher
+    rofi-wayland
+    # network manager applet
+    networkmanagerapplet
+
+    # other packages
+    obs-studio
+    discord
   ];
 
   # Enable OpenGL

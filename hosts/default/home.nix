@@ -18,59 +18,11 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    vim
-    wget
-    curl
-    htop
-    jq
-    tmux
-    yq
-    ripgrep
-    ncdu
-    nix-tree
-    # vscode
-    k3s
-    k9s
-    bat
-    eza
-    git
-    git-lfs
-    gh
-    waybar
-    eww
-    lf
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-    (pkgs.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      })
-     )
-
-    # notification deamon - also works on X 
-    dunst
-    # notification daemon - pure wayland
-    mako
-    # dependency for both notification daemons
-    libnotify
-
-    # wallpaper compositor
-    swww
-
-    # terminal emulator
-    kitty
-    
-    # app launcher
-    rofi-wayland
-    # network manager applet
-    networkmanagerapplet
-
-    # other packages
-    obs-studio
-    # discord
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
