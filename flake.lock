@@ -84,11 +84,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1710587852,
-        "narHash": "sha256-FJQj+a4WQX4t9lO+gxz06kfpBHH8HYOApJWQgdA5r0o=",
+        "lastModified": 1710588679,
+        "narHash": "sha256-4UG9u/kksDP2Q6TijoaVDIDrImEhTVlThOet7qyz0Q0=",
         "owner": "bharadwaj6",
         "repo": "nixos-vscode-server",
-        "rev": "5da8b6ca2dd9d9ccbf8334a9b24887f902eea09b",
+        "rev": "75cfc09095cca093fc2225d7ffdf4d1655eb8101",
         "type": "github"
       },
       "original": {
