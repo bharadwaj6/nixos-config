@@ -105,54 +105,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     wget
-     curl
-     htop
-     jq
-     tmux
-     yq
-     ripgrep
-     ncdu
-     nix-tree
-     vscode
-     k3s
-     k9s
-     bat
-     eza
-     git
-     git-lfs
-     gh
-     waybar
-     eww
-     
-     (pkgs.waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      })
-     )
-     
-     # notification deamon - also works on X 
-     dunst
-     # notification daemon - pure wayland
-     mako
-     # dependency for both notification daemons
-     libnotify
-
-     # wallpaper compositor
-     swww
-
-     # terminal emulator
-     kitty
-     
-     # app launcher
-     rofi-wayland
-     # network manager applet
-     networkmanagerapplet
-     
-     # file manager
-     dolphin
-     # for icons in dolphin
-     qt6.full
+    
   ];
 
   # Enable OpenGL
