@@ -23,20 +23,6 @@
     nixos-vscode-server.flake = false;
   };
 
-  # outputs = {
-  #   self,
-  #   nixpkgs,
-  #   ...
-  # } @ inputs: {
-  #   nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-  #     specialArgs = {inherit inputs;};
-  #     modules = [
-  #       ./hosts/default/configuration.nix
-  #       inputs.home-manager.nixosModules.default
-  #     ];
-  #   };
-  # };
-
   outputs = inputs @ {self, ...}:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-darwin"];
@@ -50,10 +36,6 @@
         # darwinConfigurations.appreciate =
         #   self.nixos-flake.lib.mkMacosSystem
         #   ./systems/darwin.nix;
-
-        # nixosConfigurations.linux-builder =
-        #   self.nixos-flake.lib.mkLinuxSystem
-        #   ./systems/linux-builder;
 
         nixosConfigurations = {
           default = self.nixos-flake.lib.mkLinuxSystem {

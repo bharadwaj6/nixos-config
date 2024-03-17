@@ -81,7 +81,7 @@
     packages = with pkgs; [
       firefox
       # thunderbird
-      # ungoogled-chromium
+      ungoogled-chromium
     ];
   };
 
@@ -118,31 +118,15 @@
     git
     git-lfs
     gh
-    waybar
-    eww
     lf
     nurl
     comma
-
-    # hyprland packages
-    # (
-    #   pkgs.waybar.overrideAttrs (oldAttrs: {
-    #     mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-    #   })
-    # )
-    # dunst # notification deamon - also works on X
-    # mako # notification daemon - pure wayland
-    # libnotify # dependency for both notification daemons
-    # swww # wallpaper compositor
-    # kitty # terminal emulator
-    # rofi-wayland # app launcher
-    # networkmanagerapplet # network manager applet
-
     # other packages
     obs-studio
     discord
     neovim
-    # jetbrains.pycharm-community
+    spotify
+    jetbrains.pycharm-community
   ];
 
   programs.steam = {
@@ -167,19 +151,6 @@
   services.k3s.extraFlags = toString [
     # "--kubelet-arg=v=4" # Optionally add additional args to k3s
   ];
-
-  #programs.hyprland = {
-  #  enable = true;
-  #  # enableNvidiaPatches = true;
-  #  xwayland.enable = true;
-  #};
-
-  #environment.sessionVariables = {
-  #  # If your cursor becomes invisible
-  #  WLR_NO_HARDWARE_CURSORS = "1";
-  #  # Hint electron apps to use wayland
-  #  NIXOS_OZONE_WL = "1";
-  #};
 
   services.tailscale.enable = true;
 

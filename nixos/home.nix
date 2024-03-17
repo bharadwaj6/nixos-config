@@ -73,5 +73,5 @@
   programs.home-manager.enable = true;
 
   # for gnome to show the top right icons
-  # dconf.settings."org/gnome/desktop/wm/preferences".button-layout = "minimize,maximize,close";
+  dconf.settings."org/gnome/desktop/wm/preferences".button-layout = "minimize,maximize,close";
 }
