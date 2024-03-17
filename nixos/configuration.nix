@@ -1,19 +1,8 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  lib,
-  inputs,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
+  # Configuration common to all Linux systems
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./nvidia.nix
-    inputs.home-manager.nixosModules.default
-    inputs.sops-nix.nixosModules.sops
   ];
 
   # Bootloader.
@@ -91,7 +80,8 @@
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       firefox
-      #  thunderbird
+      # thunderbird
+      # ungoogled-chromium
     ];
   };
 
@@ -120,6 +110,7 @@
     ncdu
     nix-tree
     vscode
+    nil # LSP for vscode
     k3s
     k9s
     bat
@@ -133,34 +124,25 @@
     nurl
     comma
 
-    (
-      pkgs.waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
-      })
-    )
-
-    # notification deamon - also works on X
-    dunst
-    # notification daemon - pure wayland
-    mako
-    # dependency for both notification daemons
-    libnotify
-
-    # wallpaper compositor
-    swww
-
-    # terminal emulator
-    kitty
-
-    # app launcher
-    rofi-wayland
-    # network manager applet
-    networkmanagerapplet
+    # hyprland packages
+    # (
+    #   pkgs.waybar.overrideAttrs (oldAttrs: {
+    #     mesonFlags = oldAttrs.mesonFlags ++ ["-Dexperimental=true"];
+    #   })
+    # )
+    # dunst # notification deamon - also works on X
+    # mako # notification daemon - pure wayland
+    # libnotify # dependency for both notification daemons
+    # swww # wallpaper compositor
+    # kitty # terminal emulator
+    # rofi-wayland # app launcher
+    # networkmanagerapplet # network manager applet
 
     # other packages
     obs-studio
     discord
     neovim
+    # jetbrains.pycharm-community
   ];
 
   programs.steam = {
@@ -207,39 +189,28 @@
 
   services.x2goserver.enable = true;
 
-  home-manager = {
-    extraSpecialArgs = {inherit inputs;};
-    users = {
-      "bharadwaj" = import ./home.nix;
-    };
-    useGlobalPkgs = true;
-    useUserPackages = true;
-  };
-
   sops.defaultSopsFile = ./secrets/secrets.yaml;
   sops.defaultSopsFormat = "yaml";
 
   sops.age.keyFile = "/home/bharadwaj/.config/sops/age/keys.txt";
 
-
   programs.nix-ld.enable = true;
-
 
   #xdg.portal.enable = true;
   #xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
