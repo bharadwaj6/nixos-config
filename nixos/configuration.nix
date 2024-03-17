@@ -1,8 +1,14 @@
 {pkgs, ...}: {
-  # Configuration common to all Linux systems
   imports = [
+    ./connectivity.nix
+    ./docker.nix
     ./hardware-configuration.nix
+    ./kubernetes.nix
     ./nvidia.nix
+    ./packages.nix
+    ./gnome.nix
+    ./sops.nix
+    ./steam.nix
   ];
 
   # Bootloader.
@@ -35,19 +41,6 @@
     LC_PAPER = "en_IN";
     LC_TELEPHONE = "en_IN";
     LC_TIME = "en_IN";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    xkb.layout = "us";
-    xkb.variant = "";
   };
 
   # Enable CUPS to print documents.
@@ -85,85 +78,12 @@
     ];
   };
 
-  # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "bharadwaj";
-
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    curl
-    htop
-    jq
-    tmux
-    yq
-    ripgrep
-    ncdu
-    nix-tree
-    vscode
-    nil # LSP for vscode
-    k3s
-    k9s
-    bat
-    eza
-    git
-    git-lfs
-    gh
-    lf
-    nurl
-    comma
-    # other packages
-    obs-studio
-    discord
-    neovim
-    spotify
-    jetbrains.pycharm-community
-  ];
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
-
-  virtualisation.docker.enable = true;
-  users.extraGroups.docker.members = ["bharadwaj"];
-
-  networking.firewall.allowedTCPPorts = [
-    6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
-    # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
-    # 2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
-  ];
-  networking.firewall.allowedUDPPorts = [
-    # 8472 # k3s, flannel: required if using multi-node for inter-node networking
-  ];
-  services.k3s.enable = true;
-  services.k3s.role = "server";
-  services.k3s.extraFlags = toString [
-    # "--kubelet-arg=v=4" # Optionally add additional args to k3s
-  ];
-
-  services.tailscale.enable = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   systemd.services.NetworkManager-wait-online.enable = false;
-
-  services.x2goserver.enable = true;
-
-  sops.defaultSopsFile = ./secrets/secrets.yaml;
-  sops.defaultSopsFormat = "yaml";
-
-  sops.age.keyFile = "/home/bharadwaj/.config/sops/age/keys.txt";
 
   programs.nix-ld.enable = true;
 
@@ -179,15 +99,6 @@
   };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
