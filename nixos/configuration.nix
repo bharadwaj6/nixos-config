@@ -75,7 +75,7 @@
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
-    "repl-flakes"
+    "repl-flake"
     "cgroups"
     "fetch-closure"
   ];
