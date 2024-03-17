@@ -221,6 +221,10 @@
 
   sops.age.keyFile = "/home/bharadwaj/.config/sops/age/keys.txt";
 
+
+  programs.nix-ld.enable = true;
+
+
   #xdg.portal.enable = true;
   #xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
