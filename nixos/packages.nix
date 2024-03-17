@@ -28,5 +28,8 @@
     neovim
     spotify
     jetbrains.pycharm-community
+    signal-desktop
+    whatsapp-for-linux
+    vlc
   ];
 }
