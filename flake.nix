@@ -35,7 +35,8 @@
       in {
         darwinConfigurations.appreciate =
           self.nixos-flake.lib.mkMacosSystem
-          ./nix-darwin/default.nix ./nix-darwin/system.nix;
+          ./nix-darwin/default.nix
+          ./nix-darwin/system.nix;
 
         nixosConfigurations = {
           default = self.nixos-flake.lib.mkLinuxSystem {
