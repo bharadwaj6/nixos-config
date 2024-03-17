@@ -15,16 +15,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
 
@@ -81,14 +71,17 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  # enable experimental features
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+    "repl-flakes"
+    "cgroups"
+    "fetch-closure"
+  ];
 
-  systemd.services.NetworkManager-wait-online.enable = false;
-
+  # to run unpatched dynamic libraries
   programs.nix-ld.enable = true;
-
-  #xdg.portal.enable = true;
-  #xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
