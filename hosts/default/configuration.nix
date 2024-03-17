@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     inputs.home-manager.nixosModules.default
+    inputs.sops-nix.nixosModules.sops
   ];
 
   # Bootloader.
@@ -159,6 +160,7 @@
     # other packages
     obs-studio
     discord
+    neovim
   ];
 
   programs.steam = {
@@ -210,7 +212,14 @@
     users = {
       "bharadwaj" = import ./home.nix;
     };
+    useGlobalPkgs = true;
+    useUserPackages = true;
   };
+
+  sops.defaultSopsFile = ./secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/home/bharadwaj/.config/sops/age/keys.txt";
 
   #xdg.portal.enable = true;
   #xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
