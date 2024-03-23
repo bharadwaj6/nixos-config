@@ -15,6 +15,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # to shutdown a bit faster
+  # https://unix.stackexchange.com/a/310775
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=10s
+  '';
+
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
 
