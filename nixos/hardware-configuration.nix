@@ -39,6 +39,8 @@
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
 
+  networking.nameservers = ["1.1.1.1" "8.8.8.8"];
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   # Enable OpenGL
