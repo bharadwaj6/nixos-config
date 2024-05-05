@@ -13,8 +13,8 @@
   services.xserver.desktopManager.gnome.enable = true;
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "bharadwaj";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "bharadwaj";
 
   #xdg.portal.enable = true;
   #xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
