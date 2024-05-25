@@ -21,6 +21,7 @@
     nurl
     comma
     alejandra
+    ollama
 
     # other packages
     obs-studio
